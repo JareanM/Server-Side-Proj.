@@ -1,16 +1,19 @@
-const express = require("express");
+import fetchAPI from "./script.mjs";
+import express from "express";
+
 const app = express();
 const PORT = 3000;
 
-const fetchAPI = require(./script);
+app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-	res.send("Server is running");          //confirm server runs
+	res.send("Hello World");
+	res.end();	
 }); 
 
 app.get("/api/data", async (req, res) => {
 	try {
-		const data = await fetchFromAPI();
+		const data = await fetchAPI();
 		res.json(data);
 	} catch (error) {
 		res.status(500).json({
